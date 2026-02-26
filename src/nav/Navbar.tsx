@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
         
         {/* Logo */}
         <span className="text-white text-2xl font-bold cursor-pointer">
-          <span className="text-violet-500">リシ</span> (Rishi)
+          <span className="text-violet-500">リシ</span> (Rushi)
         </span>
 
         {/* Mobile Toggle */}

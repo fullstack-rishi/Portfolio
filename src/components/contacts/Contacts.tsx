@@ -6,17 +6,14 @@ interface FormData {
   message: string;
 }
 
-const Contact: React.FC = () => {
+const Contacts: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
 
-  const [status, setStatus] = useState<{
-    isSending: boolean;
-    responseMessage: string;
-  }>({
+  const [status, setStatus] = useState({
     isSending: false,
     responseMessage: "",
   });
@@ -25,7 +22,7 @@ const Contact: React.FC = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -33,10 +30,11 @@ const Contact: React.FC = () => {
     setStatus({ isSending: true, responseMessage: "" });
 
     try {
-      const response = await fetch("https://formspree.io/f/xnnadlkb", {
+      const response = await fetch("https://formspree.io/f/maqdvboe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -47,9 +45,13 @@ const Contact: React.FC = () => {
           responseMessage: "Message sent successfully!",
         });
 
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
       } else {
-        throw new Error("Error sending message");
+        throw new Error("Failed to send");
       }
     } catch (error) {
       setStatus({
@@ -59,83 +61,66 @@ const Contact: React.FC = () => {
     }
   };
 
-  const formFields = [
-    { id: "name", type: "text", label: "Name", value: formData.name },
-    { id: "email", type: "email", label: "Email", value: formData.email },
-    {
-      id: "message",
-      type: "textarea",
-      label: "Message",
-      value: formData.message,
-      rows: 4,
-    },
-  ];
-
   return (
-    <div className="w-full max-w-2xl mx-auto p-8 bg-gray-900 text-white rounded-xl shadow-lg">
-      <h2 className="text-3xl font-bold mb-4 text-center">
+    <div className="w-full max-w-2xl mx-auto p-8 bg-gray-900 rounded-xl shadow-lg">
+      <h2 className="text-3xl font-bold mb-6 text-center text-white">
         Contact Rushikesh Barve
       </h2>
 
-      <p className="text-center text-gray-400 mb-6">
-        Frontend Developer — React & TypeScript Specialist
-      </p>
-
-      {/* Direct Contact Options */}
-      <div className="text-center mb-8 space-y-2">
-        <p>
-          📞 WhatsApp:{" "}
-          <a
-            href="https://wa.me/918180091357"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-violet-400 hover:underline"
-          >
-            8180091357
-          </a>
-        </p>
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-6">
-        {formFields.map((field) => (
-          <div key={field.id}>
-            <label
-              htmlFor={field.id}
-              className="block text-sm font-medium mb-1"
-            >
-              {field.label}
-            </label>
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-2 text-white">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="Enter your name"
+            className="w-full px-4 py-2 rounded-md bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          />
+        </div>
 
-            {field.type === "textarea" ? (
-              <textarea
-                id={field.id}
-                name={field.id}
-                value={field.value}
-                onChange={handleChange}
-                required
-                rows={field.rows}
-                placeholder={`Enter your ${field.label.toLowerCase()}`}
-                className="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition"
-              />
-            ) : (
-              <input
-                type={field.type}
-                id={field.id}
-                name={field.id}
-                value={field.value}
-                onChange={handleChange}
-                required
-                placeholder={`Enter your ${field.label.toLowerCase()}`}
-                className="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition"
-              />
-            )}
-          </div>
-        ))}
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium mb-2 text-white">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="Enter your email"
+            className="w-full px-4 py-2 rounded-md bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          />
+        </div>
 
+        {/* Message */}
+        <div>
+          <label className="block text-sm font-medium mb-2 text-white">
+            Message
+          </label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows={4}
+            placeholder="Enter your message"
+            className="w-full px-4 py-2 rounded-md bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          />
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={status.isSending}
-          className="w-full px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:bg-gray-500 transition"
+          className="w-full py-2 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-md transition disabled:bg-gray-500"
         >
           {status.isSending ? "Sending..." : "Send Message"}
         </button>
@@ -143,7 +128,7 @@ const Contact: React.FC = () => {
 
       {status.responseMessage && (
         <p
-          className={`mt-6 text-center text-sm ${
+          className={`mt-4 text-center text-sm ${
             status.responseMessage.includes("successfully")
               ? "text-green-400"
               : "text-red-400"
@@ -156,4 +141,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact;
+export default Contacts;
