@@ -10,172 +10,91 @@ const Navbar: React.FC = () => {
   const whatsappLink =
     "https://wa.me/918180091357?text=Hi%20Rishi%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect.";
 
-  const emailLink =
-    "mailto:rishi81800@gmail.com?subject=Project%20Inquiry&body=Hi%20Rishi%2C%20I%20would%20like%20to%20connect%20with%20you.";
-
-  const navClass =
-    "text-white text-lg cursor-pointer py-2 px-4 relative " +
-    "after:content-[''] after:absolute after:bottom-0 after:left-0 " +
-    "after:w-full after:h-0.5 after:bg-current after:scale-x-0 " +
-    "hover:after:scale-x-100 after:transform " +
-    "after:origin-bottom-right hover:after:origin-bottom-left " +
-    "after:transition-transform after:duration-300";
-
   return (
-    <nav className="bg-gray-800 p-4 relative z-50">
-      <div className="flex justify-between gap-10 items-center h-16 w-full">
-        
+    <nav className="bg-gray-800 px-4 py-3 relative z-50">
+      <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
+
         {/* Logo */}
-        <span className="text-white text-2xl font-bold cursor-pointer">
-          <span className="text-violet-500">リシ</span> (Rushi)
+        <span className="text-white text-2xl font-bold cursor-pointer select-none">
+          <span className="text-accent">リシ</span> (Rushi)
         </span>
 
         {/* Mobile Toggle */}
-        <div className="relative">
-          <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-            {isOpen ? (
-              <X className="text-white w-6 h-6" />
-            ) : (
-              <Menu className="text-white w-6 h-6" />
-            )}
-          </div>
-
-          {/* Mobile Menu */}
-          {isOpen && (
-            <div className="absolute top-full right-0 mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-40 w-56">
-
-              <Link
-                to="home"
-                spy={true}
-                smooth={true}
-                duration={500}
-                activeClass="text-violet-500"
-                className={navClass}
-                onClick={toggleMenu}
-              >
-                <span className="text-violet-500">#</span>home
-              </Link>
-
-              <Link
-                to="works"
-                spy={true}
-                smooth={true}
-                duration={500}
-                activeClass="text-violet-500"
-                className={navClass}
-                onClick={toggleMenu}
-              >
-                <span className="text-violet-500">#</span>skills
-              </Link>
-
-              <Link
-                to="about-me"
-                spy={true}
-                smooth={true}
-                duration={500}
-                activeClass="text-violet-500"
-                className={navClass}
-                onClick={toggleMenu}
-              >
-                <span className="text-violet-500">#</span>projects
-              </Link>
-
-              <Link
-                to="contacts"
-                spy={true}
-                smooth={true}
-                duration={500}
-                activeClass="text-violet-500"
-                className={navClass}
-                onClick={toggleMenu}
-              >
-                <span className="text-violet-500">#</span>contacts
-              </Link>
-
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={navClass}
-              >
-                <span className="text-violet-500">#</span>whats-app
-              </a>
-
-              <a
-                href={emailLink}
-                className={navClass}
-              >
-                <span className="text-violet-500">#</span>email
-              </a>
-            </div>
-          )}
-        </div>
+        <button
+          className="md:hidden text-white"
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8">
-
-          <Link
-            to="home"
-            spy={true}
-            smooth={true}
-            duration={500}
-            activeClass="text-violet-500"
-            className={navClass}
-          >
-            <span className="text-violet-500">#</span>home
-          </Link>
-
-          <Link
-            to="works"
-            spy={true}
-            smooth={true}
-            duration={500}
-            activeClass="text-violet-500"
-            className={navClass}
-          >
-            <span className="text-violet-500">#</span>skills
-          </Link>
-
-          <Link
-            to="about-me"
-            spy={true}
-            smooth={true}
-            duration={500}
-            activeClass="text-violet-500"
-            className={navClass}
-          >
-            <span className="text-violet-500">#</span>projects
-          </Link>
-
-          <Link
-            to="contacts"
-            spy={true}
-            smooth={true}
-            duration={500}
-            activeClass="text-violet-500"
-            className={navClass}
-          >
-            <span className="text-violet-500">#</span>contacts
-          </Link>
+        <div className="hidden md:flex gap-8 items-center">
+          {["home", "works", "about-me", "contacts"].map((item) => (
+            <Link
+              key={item}
+              to={item}
+              smooth
+              duration={500}
+              className="text-white text-lg cursor-pointer relative py-2 px-2
+                after:content-[''] after:absolute after:left-0 after:bottom-0
+                after:h-0.5 after:w-full after:bg-current after:scale-x-0
+                hover:after:scale-x-100 after:transition-transform after:duration-300"
+            >
+              <span className="text-hash">#</span>
+              {item === "about-me"
+                ? "projects"
+                : item === "works"
+                ? "skills"
+                : item}
+            </Link>
+          ))}
 
           <a
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className={navClass}
+            className="text-white text-lg cursor-pointer relative py-2 px-2
+              after:content-[''] after:absolute after:left-0 after:bottom-0
+              after:h-0.5 after:w-full after:bg-current after:scale-x-0
+              hover:after:scale-x-100 after:transition-transform after:duration-300"
           >
-            <span className="text-violet-500">#</span>whats-app
+            <span className="text-hash">#</span>whats-app
           </a>
-
-          <a
-            href={emailLink}
-            className={navClass}
-          >
-            <span className="text-violet-500">#</span>email
-          </a>
-
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden mt-4 bg-gray-800 border border-gray-700 rounded-xl shadow-lg overflow-hidden">
+          {["home", "works", "about-me", "contacts"].map((item) => (
+            <Link
+              key={item}
+              to={item}
+              smooth
+              duration={500}
+              onClick={toggleMenu}
+              className="block text-white text-lg px-5 py-3 hover:bg-gray-700"
+            >
+              <span className="text-hash">#</span>
+              {item === "about-me"
+                ? "projects"
+                : item === "works"
+                ? "skills"
+                : item}
+            </Link>
+          ))}
+
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-white text-lg px-5 py-3 hover:bg-gray-700"
+          >
+            <span className="text-hash">#</span>whats-app
+          </a>
+        </div>
+      )}
     </nav>
   );
 };

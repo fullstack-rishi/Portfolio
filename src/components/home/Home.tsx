@@ -8,27 +8,42 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col mt-10 md:flex-row justify-between items-center px-6 md:px-16">
+    <div className="flex flex-col mt-10 md:flex-row justify-between items-center px-4 sm:px-8 md:px-0">
 
       {/* LEFT SECTION */}
-      <div className="md:w-1/2 flex flex-col gap-6 py-10">
+      <div className="w-full md:w-1/2 flex flex-col gap-4 py-8 md:py-10 md:px-2 text-center md:text-left">
 
-        <div className="text-2xl md:text-4xl font-semibold">
+        {/* Name */}
+        <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold">
           I am{" "}
-          <span className="text-violet-500">
+          <span className="text-accent">
             Rushikesh Barve
           </span>
         </div>
 
-        <div className="text-gray-400 leading-relaxed">
-          I specialize in building modern, responsive user interfaces using{" "}
-          <span className="text-violet-400">React</span> and{" "}
-          <span className="text-violet-400">TypeScript</span>. 
-          My focus is on clean component architecture, efficient state management, 
-          and delivering smooth, high-performance frontend experiences.
+        {/* Description */}
+        <div className="text-gray-500 mt-4 sm:mt-6 leading-relaxed max-w-xl mx-auto md:mx-0">
+          I specialize in{" "}
+          <span className="text-accent">
+            frontend development
+          </span>{" "}
+          using{" "}
+          <span className="text-accent">
+            React
+          </span>{" "}
+          and{" "}
+          <span className="text-accent">
+            TypeScript
+          </span>
+          . My focus is on building{" "}
+          <span className="text-accent">
+            clean, responsive interfaces
+          </span>{" "}
+          with scalable component architecture and high performance.
         </div>
 
-        <div className="text-3xl md:text-4xl font-semibold text-violet-500 mt-6">
+        {/* Typewriter */}
+        <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-accent mt-8 sm:mt-10">
           {text}
           <Cursor />
         </div>
@@ -36,11 +51,11 @@ export default function Home() {
       </div>
 
       {/* RIGHT IMAGE SECTION */}
-      <div className="py-10">
+      <div className="py-6 sm:py-10 md:px-2 flex justify-center">
         <img
           src={picImage}
           alt="Rushikesh Barve"
-          className="w-72 md:w-96 rounded-xl shadow-2xl object-cover"
+          className="w-60 sm:w-72 md:w-96 object-cover rounded-lg"
         />
       </div>
 

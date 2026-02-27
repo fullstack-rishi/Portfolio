@@ -61,60 +61,29 @@ const Link = ({ heading, subheading, href }: LinkProps) => {
       href={href}
       ref={ref}
       onMouseMove={handleMouseMove}
-      initial="initial"
-      whileHover="whileHover"
       className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-6 transition-colors duration-500 hover:border-violet-500 md:py-8"
     >
       <div>
         <motion.span
-          variants={{
-            initial: { x: 0 },
-            whileHover: { x: -16 },
-          }}
-          transition={{
-            type: "spring",
-            staggerChildren: 0.075,
-            delayChildren: 0.25,
-          }}
-          className="relative z-10 block text-4xl md:text-5xl font-bold text-neutral-400 transition-colors duration-500 group-hover:text-violet-500"
+          className="relative z-10 block text-2xl md:text-4xl font-bold text-neutral-400 transition-colors duration-500 group-hover:text-violet-500"
         >
-          {heading.split("").map((l, i) => (
-            <motion.span
-              key={i}
-              variants={{
-                initial: { x: 0 },
-                whileHover: { x: 16 },
-              }}
-              transition={{ type: "spring" }}
-              className={`inline-block ${
-                l === " " ? "whitespace-pre" : ""
-              }`}
-            >
-              {l}
-            </motion.span>
-          ))}
+          {heading}
         </motion.span>
 
-        <span className="relative z-10 mt-3 block text-base text-neutral-400 transition-colors duration-500 group-hover:text-white">
+        <span className="relative z-10 mt-3 block text-sm md:text-base text-neutral-400 transition-colors duration-500 group-hover:text-white">
           {subheading}
         </span>
       </div>
 
+      {/* ✅ Arrow Animation Works on Laptop + Mobile */}
       <motion.div
-        variants={{
-          initial: {
-            x: "25%",
-            opacity: 0,
-          },
-          whileHover: {
-            x: "0%",
-            opacity: 1,
-          },
-        }}
-        transition={{ type: "spring" }}
+        initial={{ x: 0, opacity: 1 }}
+        whileHover={{ x: 10 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 250 }}
         className="relative z-10 p-4"
       >
-        <FiArrowRight className="text-violet-500 text-xl" />
+        <FiArrowRight className="text-violet-500 text-xl md:text-2xl" />
       </motion.div>
     </motion.a>
   );
