@@ -66,7 +66,7 @@ npm run build
 
 ## 🌐 Live Demo
 
-(Add your deployed link here after deployment)
+https://portfolio-woad-ten-84xqu3bwau.vercel.app/
 
 ---
 
